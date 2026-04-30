@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tech Portfolio | Software & UI/UX</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050b14;
+            --surface-color: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --neon-blue: #00f0ff;
+            --neon-purple: #7000ff;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(112, 0, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.08) 0%, transparent 50%);
+        }
+
+        /* --- Scroll Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 11, 20, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* --- Buttons --- */
+        .cyber-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: transparent;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid var(--neon-blue);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+        }
+
+        .cyber-btn:hover {
+            background: var(--neon-blue);
+            color: var(--bg-color);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+        }
+
+        /* --- Projects Section --- */
+        .projects {
+            padding: 100px 10% 40px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .project-card {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 80px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .project-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .project-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .project-info h3 {
+            color: var(--neon-blue);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            padding: 5px 15px;
+            background: rgba(112, 0, 255, 0.1);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #d8b4fe;
+        }
+
+        /* App Gallery (Alpha Academy) */
+        .app-gallery {
+            flex: 1.5;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            min-width: 300px;
+        }
+
+        .phone-mockup {
+            width: 200px;
+            height: 420px;
+            border-radius: 30px;
+            border: 8px solid #1e293b;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: var(--transition);
+        }
+
+        .phone-mockup img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .phone-mockup:nth-child(2) {
+            transform: translateY(30px);
+        }
+        
+        .phone-mockup:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        /* Web Gallery (Check-Up Me) */
+        .web-mockup {
+            flex: 1.5;
+            min-width: 300px;
+            border-radius: 10px 10px 0 0;
+            border: 2px solid var(--border-color);
+            background: #0f172a;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            transition: var(--transition);
+        }
+
+        .web-mockup:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 30px rgba(112, 0, 255, 0.3);
+        }
+
+        .browser-top {
+            background: #1e293b;
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot.r { background: #ff5f56; }
+        .dot.y { background: #ffbd2e; }
+        .dot.g { background: #27c93f; }
+
+        .iframe-container {
+            width: 100%;
+            height: 350px;
+            background: #fff;
+            position: relative;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- Contact Section --- */
+        .contact {
+            padding: 60px 10% 100px 10%;
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            min-width: 260px;
+            justify-content: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 900px) {
+            .app-gallery { flex-direction: column; align-items: center; }
+            .phone-mockup:nth-child(2) { transform: translateY(0); }
+            .project-card { padding: 30px; }
+            .contact-card { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">PORT<span class="gradient-text">FOLIO</span></a>
+        <div class="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1 class="reveal">Engineering the <br><span class="gradient-text">Future of Tech</span></h1>
+        <p class="reveal" style="transition-delay: 0.1s;">Showcasing my premier university projects: modern UI/UX design, mobile application architecture, and interactive web platforms.</p>
+        <div class="reveal" style="transition-delay: 0.2s;">
+            <a href="#projects" class="cyber-btn">EXPLORE PROJECTS</a>
+        </div>
+    </header>
+
+    <section id="projects" class="projects">
+        <h2 class="section-title reveal"><span class="gradient-text">Featured Works</span></h2>
+
+        <div class="project-card reveal">
+            <div class="project-info">
+                <h2>Alpha Academy</h2>
+                <h3>Educational Mobile Application</h3>
+                <p>A comprehensive mobile learning platform designed to streamline digital education. It features a fully localized Arabic interface and role-based access for both students (طالب) and teachers (أستاذ).</p>
+                <p>The app offers an intuitive course dashboard where users can search for subjects and enroll in categorized modules like 12th Grade Physics, 11th Grade Calculus 1, and Algebra 2. It also includes a secure activation code system to manage course subscriptions globally.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">Flutter</span>
+                    <span class="tech-tag">Dart</span>
+                    <span class="tech-tag">UI/UX Prototyping</span>
+                    <span class="tech-tag">Cross-Platform</span>
+                </div>
+            </div>
+            
+            <div class="app-gallery">
+                <div class="phone-mockup">
+                    <img src="1.jpeg" alt="Alpha Academy Login Screen">
+                </div>
+                <div class="phone-mockup">
+                    <img src="2.jpeg" alt="Alpha Academy Dashboard">
+                </div>
+                <div class="phone-mockup">
+                    <img src="5.jpeg" alt="Alpha Academy Course Details">
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card reveal">
+            <div class="web-mockup">
+                <div class="browser-top">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                </div>
+                <div class="iframe-container">
+                    <iframe src="https://ramazar.github.io/check-up-me/Home.html" title="Check-Up Me Live Preview"></iframe>
+                </div>
+            </div>
+
+            <div class="project-info">
+                <h2>Check-Up Me (MedGO)</h2>
+                <h3>Interactive Diagnostic Web Platform</h3>
+                <p>A robust, web-based healthcare prototype engineered to bring medical assistance to users' fingertips. Built as part of a university initiative, the platform aims to improve overall health through the early detection of diseases.</p>
+                <p>The platform features a symptom-based diagnostic tool, a comprehensive A-Z Medical Encyclopedia, and a geolocation-based "Find a Doctor" interface. The UI is fully responsive, leveraging modern front-end technologies to deliver a fast, reliable, and accessible user experience across all devices.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3 / Animations</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Responsive Web Design</span>
+                </div>
+
+                <a href="https://ramazar.github.io/check-up-me/Home.html" target="_blank" class="cyber-btn" style="padding: 10px 25px; font-size: 0.9rem;">VISIT LIVE SITE</a>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title reveal"><span class="gradient-text">Connect With Me</span></h2>
+        <div class="contact-grid reveal">
+            
+            <a href="tel:+963964782596" class="contact-card">
+                <span class="contact-icon">📱</span>
+                <span>+963 964 782 596</span>
+            </a>
+
+            <a href="mailto:ramalzaher@gmail.com" class="contact-card">
+                <span class="contact-icon">✉️</span>
+                <span>ramalzaher@gmail.com</span>
+            </a>
+
+            <a href="https://codeforces.com/profile/ramalzaher" target="_blank" class="contact-card">
+                <span class="contact-icon">💻</span>
+                <span>Codeforces Profile</span>
+            </a>
+
+            <a href="https://www.instagram.com/ram_alzaher/" target="_blank" class="contact-card">
+                <span class="contact-icon">📸</span>
+                <span>@ram_alzaher</span>
+            </a>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Designed and Developed for University Portfolio Showcase.</p>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
